@@ -1,8 +1,10 @@
+import { env } from "@/env";
+
 export default {
-  host: process.env.MAIL_HOST,
-  port: process.env.MAIL_PORT,
+  host: env.MAIL_HOST,
+  port: env.MAIL_PORT,
   auth: {
-    user: process.env.MAIL_USER,
-    pass: process.env.MAIL_PASS,
+    user: env.MAIL_USER,
+    pass: env.MAIL_PASS,
   },
 };
