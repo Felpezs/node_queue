@@ -1,22 +1,22 @@
 import type { Request, Response } from "express";
-import mailQueue from "../lib/queue";
 import queue from "../lib/queue";
-
-type User = {
-  name: string;
-  email: string;
-  password: string;
-};
+import { z } from "zod";
 
 export default {
   async store(req: Request, res: Response) {
-    const { name, email, password } = req.body as User;
+    const parseObject = z.object({
+      name: z.string({ required_error: "Name is a required" }).min(1).trim(),
+      email: z
+        .string({ required_error: "Email is required" })
+        .email("Not a valid email")
+        .trim(),
+      password: z
+        .string({ required_error: "Password is required" })
+        .min(5)
+        .trim(),
+    });
 
-    const user = {
-      name,
-      email,
-      password,
-    };
+    const user = parseObject.parse(req.body);
 
     await queue.add("RegistrationMail", { user });
 

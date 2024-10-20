@@ -1,4 +1,6 @@
-export default{
-  host: process.env.REDIS_HOST,
-  port: process.env.REDIS_PORT,
-}
+import { env } from "@/env";
+
+export default {
+  host: env.REDIS_HOST,
+  port: env.REDIS_PORT,
+};
