@@ -1,0 +1,7 @@
+name: node-queue
+version: '3.8'
+services:
+  redis:
+    ports:
+      - "6379:6379"
+    image: "redis:alpine"
